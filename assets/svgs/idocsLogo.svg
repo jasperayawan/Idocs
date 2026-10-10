@@ -1,0 +1,26 @@
+<svg width="124" height="127" viewBox="0 0 124 127" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="124" height="127" rx="20" fill="#A1CB35"/>
+<rect x="12" y="12" width="100" height="103" rx="13" fill="black"/>
+<ellipse cx="40" cy="42" rx="14" ry="13" fill="#A1CB35"/>
+<path d="M22 87.5064C22 78.5064 25.7 60.4064 40.5 60.0064C52.1263 59.6921 56.9027 71.0823 58.4166 80.5063H94C101.6 80.5063 102.167 85.173 101.5 87.5064H59H22Z" fill="#A1CB35" stroke="#A1CB35"/>
+<use xlink:href="#stroke0_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke0_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke0_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke0_5_15" fill="#A1CB35"/>
+<path d="M65 55H100C101.105 55 102 55.8954 102 57V58C102 59.1046 101.105 60 100 60H65C63.8954 60 63 59.1046 63 58V57C63 55.8954 63.8954 55 65 55Z" stroke="#A1CB35"/>
+<use xlink:href="#stroke1_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke1_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke1_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke1_5_15" fill="#A1CB35"/>
+<path d="M24 93H100C101.105 93 102 93.8954 102 95V96C102 97.1046 101.105 98 100 98H24C22.8954 98 22 97.1046 22 96V95C22 93.8954 22.8954 93 24 93Z" stroke="#A1CB35"/>
+<use xlink:href="#stroke2_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke2_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke2_5_15" fill="#A1CB35"/>
+<use xlink:href="#stroke2_5_15" fill="#A1CB35"/>
+<path d="M65 45H100C101.105 45 102 45.8954 102 47V48C102 49.1046 101.105 50 100 50H65C63.8954 50 63 49.1046 63 48V47C63 45.8954 63.8954 45 65 45Z" stroke="#A1CB35"/>
+<defs>
+<path id="stroke0_5_15" d="M100 55H65C63.8954 55 63 55.8954 63 57V58C63 59.1046 63.8954 60 65 60H100C101.105 60 102 59.1046 102 58V57C102 55.8954 101.105 55 100 55Z"/>
+<path id="stroke1_5_15" d="M100 93H24C22.8954 93 22 93.8954 22 95V96C22 97.1046 22.8954 98 24 98H100C101.105 98 102 97.1046 102 96V95C102 93.8954 101.105 93 100 93Z"/>
+<path id="stroke2_5_15" d="M100 45H65C63.8954 45 63 45.8954 63 47V48C63 49.1046 63.8954 50 65 50H100C101.105 50 102 49.1046 102 48V47C102 45.8954 101.105 45 100 45Z"/>
+</defs>
+</svg>
