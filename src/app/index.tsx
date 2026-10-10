@@ -1,7 +1,19 @@
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Logo from "../../assets/svgs/idocsLogo.svg";
 
 export default function Index() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace("/(tabs)");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
     <View style={styles.container}>
       <Logo width={100} height={100} />
@@ -9,6 +21,12 @@ export default function Index() {
       <Text style={styles.text}>
         Your identity. Your documents. {"\n"}One Place.
       </Text>
+
+      <View style={styles.bottomContainer}>
+        <Text style={styles.bottomText}>
+          All your documents and Ids {"\n"} are available in one place.
+        </Text>
+      </View>
     </View>
   );
 }
@@ -21,6 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flexDirection: "column",
     gap: 15,
+    position: "relative",
   },
   title: {
     color: "#A1CB35",
@@ -29,7 +48,20 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ebf3d5",
-    fontSize: 16,
+    fontSize: 18,
     textAlign: "center",
+  },
+  bottomContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bottomText: {
+    color: "#ebf3d5",
+    fontSize: 14,
   },
 });

@@ -9,6 +9,7 @@ export default function HomeScreen() {
         justifyContent: "center",
         alignItems: "center",
       }}
+      showsVerticalScrollIndicator={false}
     >
       <View>
         <Text style={styles.text}>Hello World</Text>
@@ -20,6 +21,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: "relative",
   },
   text: {
     color: "#ffffff",
