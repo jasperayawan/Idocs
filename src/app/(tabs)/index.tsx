@@ -18,15 +18,23 @@ export default function HomeScreen() {
         {
           flex: 1,
           paddingTop: insets.top,
-          paddingLeft: insets.left,
-          paddingRight: insets.right,
+          paddingLeft: insets.left + 15,
+          paddingRight: insets.right + 15,
           backgroundColor: theme.background,
         },
       ]}
     >
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Text style={[styles.text, { color: theme.text }]}>Idocs</Text>
+          <View style={{ flexDirection: "column", gap: 5 }}>
+            <Text style={[styles.text, { color: theme.text }]}>
+              <Text style={{ color: theme.selectedButton }}>I</Text>
+              docs
+            </Text>
+            <Text style={[styles.subTitle, { color: "#999999" }]}>
+              YOUR COLLECTIONS
+            </Text>
+          </View>
           <Cards />
         </View>
       </ScrollView>
@@ -43,8 +51,12 @@ const styles = StyleSheet.create({
     fontSize: Size.title,
     fontWeight: fontWeights.semibold,
   },
+  subTitle: {
+    fontSize: 10,
+    fontWeight: fontWeights.regular,
+  },
   content: {
     flexDirection: "column",
-    gap: 10,
+    gap: 20,
   },
 });

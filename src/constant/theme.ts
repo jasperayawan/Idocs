@@ -10,7 +10,7 @@ export const Colors = {
     transparent: "",
   },
   dark: {
-    background: "#000000",
+    background: "#131313",
     text: "#ffffff",
     highlightedText: "#ebf3d5",
     selectedButton: "#A1CB35",

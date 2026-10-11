@@ -1,5 +1,7 @@
-import { Size, fontWeights } from "@/constant/theme";
+import { svgs } from "@/constant/svgs";
+import { fontWeights } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Cards() {
@@ -9,12 +11,14 @@ export default function Cards() {
     {
       id: 1,
       title: "School",
-      color: "#b8e24d",
+      subTitle: "Academic redocs & IDs",
+      color: "#9DBB50",
     },
     {
       id: 2,
       title: "PSA",
-      color: "#edd340",
+      subTitle: "Birth, marriage & more",
+      color: "#BBB850",
     },
   ];
 
@@ -25,9 +29,23 @@ export default function Cards() {
           key={i}
           style={[styles.cardContainer, { backgroundColor: d.color }]}
         >
-          <Text style={[styles.text, { color: theme.background }]}>
-            {d.title}
-          </Text>
+          {d.id === 1 ? (
+            <svgs.docu width={100} height={100} />
+          ) : (
+            <svgs.card width={100} height={100} />
+          )}
+
+          <View style={styles.bottomContainerContent}>
+            <View style={styles.bottomContent}>
+              <Text style={[styles.text, { color: theme.background }]}>
+                {d.title}
+              </Text>
+              <Text style={[styles.subTitle, { color: theme.background }]}>
+                {d.subTitle}
+              </Text>
+            </View>
+            <Ionicons name="arrow-forward" size={20} />
+          </View>
         </View>
       ))}
     </View>
@@ -39,19 +57,35 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexDirection: "row",
     padding: 1,
-    gap: 5,
+    gap: 10,
   },
   cardContainer: {
+    position: "relative",
     flex: 1,
-    padding: 16,
-    height: 200,
+    height: 174,
     alignItems: "center",
     justifyContent: "center",
-    borderTopRightRadius: 40,
-    borderBottomLeftRadius: 40,
+    borderRadius: 14,
+    gap: 10,
+  },
+  bottomContainerContent: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  bottomContent: {
+    flexDirection: "column",
+    gap: 5,
   },
   text: {
-    fontSize: Size.subTitle,
+    fontSize: 16,
+    fontWeight: fontWeights.bold,
+  },
+  subTitle: {
+    fontSize: 10,
     fontWeight: fontWeights.regular,
   },
 });
