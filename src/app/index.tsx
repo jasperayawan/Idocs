@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000000",
     flexDirection: "column",
     gap: 15,
     position: "relative",

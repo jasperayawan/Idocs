@@ -1,8 +1,11 @@
+import { useTheme } from "@/hooks/use-theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { View } from "react-native";
 
 export default function TabsLayout() {
+  const theme = useTheme();
+
   return (
     <Tabs
       screenOptions={{
@@ -47,10 +50,12 @@ export default function TabsLayout() {
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ size, focused }) => (
             <View
               style={{
-                backgroundColor: focused ? "#A1CB35" : "",
+                backgroundColor: focused
+                  ? theme.selectedButton
+                  : theme.transparent,
                 borderRadius: 17,
                 height: 50,
                 width: 70,
@@ -72,10 +77,12 @@ export default function TabsLayout() {
         options={{
           title: "Documents",
           headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ size, focused }) => (
             <View
               style={{
-                backgroundColor: focused ? "#A1CB35" : "",
+                backgroundColor: focused
+                  ? theme.selectedButton
+                  : theme.transparent,
                 borderRadius: 17,
                 height: 50,
                 width: 70,
@@ -97,10 +104,12 @@ export default function TabsLayout() {
         options={{
           title: "More",
           headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ size, focused }) => (
             <View
               style={{
-                backgroundColor: focused ? "#A1CB35" : "",
+                backgroundColor: focused
+                  ? theme.selectedButton
+                  : theme.transparent,
                 borderRadius: 17,
                 height: 50,
                 width: 70,
