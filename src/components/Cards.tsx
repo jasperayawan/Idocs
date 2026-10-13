@@ -1,13 +1,14 @@
 import { svgs } from "@/constant/svgs";
 import { fontWeights } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { CardDataProps } from "@/types/type";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Cards() {
+export default function Cards({}) {
   const theme = useTheme();
 
-  const data = [
+  const data: CardDataProps[] = [
     {
       id: 1,
       title: "School",

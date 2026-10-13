@@ -1,11 +1,5 @@
+import { CameraFrameProps } from "@/types/type";
 import { StyleSheet, View } from "react-native";
-
-type CameraFrameProps = {
-  size?: number;
-  color?: string;
-  thickness?: number;
-  cornerLength?: number;
-};
 
 export default function CameraFrame({
   size = 280,
