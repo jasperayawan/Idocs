@@ -3,8 +3,14 @@ import Cards from "@/components/Cards";
 import { Size, fontWeights } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { Ionicons } from "@expo/vector-icons";
-import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { useState } from "react";
+import {
+  CameraCapturedPicture,
+  CameraType,
+  CameraView,
+  useCameraPermissions,
+} from "expo-camera";
+import { Image } from "expo-image";
+import { useRef, useState } from "react";
 import {
   Modal,
   ScrollView,
@@ -21,7 +27,9 @@ import {
 export default function HomeScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [facing, setFacing] = useState<CameraType>("back");
+  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
   const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef<CameraView>(null);
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -34,6 +42,25 @@ export default function HomeScreen() {
       }
     }
     setModalVisible(true);
+  };
+
+  const handleCloseButton = () => {
+    setModalVisible(false);
+    setCapturedPhoto(null);
+  };
+
+  const handleCapture = async () => {
+    try {
+      if (!cameraRef.current) return;
+
+      const photo: CameraCapturedPicture | undefined =
+        await cameraRef.current.takePictureAsync();
+
+      if (!photo) return;
+      setCapturedPhoto(photo.uri);
+    } catch (err) {
+      console.log("Failed to capture photo:", err);
+    }
   };
 
   return (
@@ -69,17 +96,37 @@ export default function HomeScreen() {
           onRequestClose={() => setModalVisible(false)}
         >
           <View style={styles.modalContainer}>
-            <CameraView style={styles.camera} facing={facing} />
+            {capturedPhoto ? (
+              <View style={styles.capturedPhotoContainer}>
+                <Image
+                  source={{ uri: capturedPhoto }}
+                  style={{ width: "95%", height: "100%", borderRadius: 12 }}
+                />
+              </View>
+            ) : (
+              <>
+                <CameraView
+                  ref={cameraRef}
+                  style={styles.camera}
+                  facing={facing}
+                />
+                <CameraFrame />
+
+                <View style={styles.buttonCaptureContainer}>
+                  <TouchableOpacity
+                    onPress={handleCapture}
+                    style={styles.buttonCapture}
+                    activeOpacity={0.7}
+                  >
+                    <View style={styles.innerButtonCapture}></View>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <TouchableOpacity onPress={handleCloseButton}>
                 <Ionicons color={"#fff"} name="close" size={24} />
               </TouchableOpacity>
-            </View>
-
-            <CameraFrame />
-
-            <View style={styles.buttonCaptureContainer}>
-              <TouchableOpacity style={styles.buttonCapture}></TouchableOpacity>
             </View>
           </View>
         </Modal>
@@ -138,8 +185,25 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   buttonCapture: {
-    width: 60,
-    height: 60,
+    width: 65,
+    height: 65,
+    borderRadius: 50,
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  capturedPhotoContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  innerButtonCapture: {
+    width: 57,
+    height: 57,
     borderRadius: 50,
     backgroundColor: "#fff",
   },
