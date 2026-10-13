@@ -3,6 +3,7 @@ import Cards from "@/components/Cards";
 import { Size, fontWeights } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { Ionicons } from "@expo/vector-icons";
+import { useAudioPlayer } from "expo-audio";
 import {
   CameraCapturedPicture,
   CameraType,
@@ -49,9 +50,15 @@ export default function HomeScreen() {
     setCapturedPhoto(null);
   };
 
+  const shutterPlayer = useAudioPlayer(
+    require("@/assets/sounds/camera-shutter.mp3"),
+  );
+
   const handleCapture = async () => {
     try {
       if (!cameraRef.current) return;
+      shutterPlayer.seekTo(0);
+      shutterPlayer.play();
 
       const photo: CameraCapturedPicture | undefined =
         await cameraRef.current.takePictureAsync();
@@ -100,7 +107,7 @@ export default function HomeScreen() {
               <View style={styles.capturedPhotoContainer}>
                 <Image
                   source={{ uri: capturedPhoto }}
-                  style={{ width: "95%", height: "100%", borderRadius: 12 }}
+                  style={{ width: "100%", height: "100%", borderRadius: 12 }}
                 />
               </View>
             ) : (
