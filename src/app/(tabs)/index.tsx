@@ -1,5 +1,6 @@
 import CameraFrame from "@/components/CameraFrame";
 import Cards from "@/components/Cards";
+import CollectionForm from "@/components/CollectionForm";
 import { Size, fontWeights } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { Ionicons } from "@expo/vector-icons";
@@ -30,6 +31,7 @@ export default function HomeScreen() {
   const [facing, setFacing] = useState<CameraType>("back");
   const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
   const [permission, requestPermission] = useCameraPermissions();
+  const [isAcceptedCapturedPhoto, setIsAcceptedCapturedPhoto] = useState(false);
   const cameraRef = useRef<CameraView>(null);
   const theme = useTheme();
   const insets = useSafeAreaInsets();
@@ -48,6 +50,7 @@ export default function HomeScreen() {
   const handleCloseButton = () => {
     setModalVisible(false);
     setCapturedPhoto(null);
+    setIsAcceptedCapturedPhoto(false);
   };
 
   const shutterPlayer = useAudioPlayer(
@@ -61,7 +64,9 @@ export default function HomeScreen() {
       shutterPlayer.play();
 
       const photo: CameraCapturedPicture | undefined =
-        await cameraRef.current.takePictureAsync();
+        await cameraRef.current.takePictureAsync({
+          shutterSound: false,
+        });
 
       if (!photo) return;
       setCapturedPhoto(photo.uri);
@@ -107,8 +112,22 @@ export default function HomeScreen() {
               <View style={styles.capturedPhotoContainer}>
                 <Image
                   source={{ uri: capturedPhoto }}
-                  style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                  style={{
+                    width: isAcceptedCapturedPhoto ? "30%" : "100%",
+                    height: isAcceptedCapturedPhoto ? "30%" : "100%",
+                    borderRadius: 12,
+                  }}
                 />
+                <TouchableOpacity
+                  onPress={() => setIsAcceptedCapturedPhoto(true)}
+                  style={styles.buttonAcceptAndCaptureContainer}
+                >
+                  {!isAcceptedCapturedPhoto && (
+                    <Ionicons name="checkmark" size={24} color={"#fff"} />
+                  )}
+                </TouchableOpacity>
+
+                {isAcceptedCapturedPhoto && <CollectionForm />}
               </View>
             ) : (
               <>
@@ -119,7 +138,7 @@ export default function HomeScreen() {
                 />
                 <CameraFrame />
 
-                <View style={styles.buttonCaptureContainer}>
+                <View style={styles.buttonAcceptAndCaptureContainer}>
                   <TouchableOpacity
                     onPress={handleCapture}
                     style={styles.buttonCapture}
@@ -182,7 +201,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonCaptureContainer: {
+  buttonAcceptAndCaptureContainer: {
     position: "absolute",
     bottom: 0,
     left: 0,
